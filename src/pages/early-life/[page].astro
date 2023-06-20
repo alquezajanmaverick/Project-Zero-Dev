@@ -1,0 +1,111 @@
+---
+import Theme from "../../layouts/Theme.astro";
+import FullPage from "../../components/FullPage.astro";
+import Paginator from "../../components/Paginator.astro";
+
+export async function getStaticPaths({ paginate }) {
+  const pages = [
+    {
+      title: "Ramon with his parents and sister Mercedes",
+      image: "/images/birth/birth1.jpg",
+      text: "Ramon del Fierro Magsaysay Sr. was born on Saturday, August 31, 1907, in Iba, Zambales. His father was Exequiel Magsaysay; his mother was Perfecta del Fierro. The Magsaysays led a simple life in Iba.",
+    },
+    {
+      title: "Exequiel Magsaysay, father of Ramon Magsaysay.",
+      image: "/images/birth/birth2.jpg",
+      text: "Exequiel Magsaysay was a teacher of carpentry and blacksmithing. In 1914, he moved his family to the town of Castillejos. He established there as his livelihood a carpentry shop and a courier service.",
+    },
+    {
+      title: "Perfecta del Fierro, mother of Ramon Magsaysay.",
+      image: "/images/birth/birth3.jpg",
+      text: "Perfecta del Fierro had Spanish and Samarnon ancestry. She was religious and taught her children good manners. Although from an affluent clan, she did not hesitate to put up a store to help with the family’s expenses. ",
+    },
+    {
+      title: "Ramon, at three years old.",
+      image: "/images/birth/birth4.png",
+      text: "Ramon graduated from Castillejos Elementary School. Although carefree in his studies, Ramon still emerged as salutatorian in high school at the Zambales Academy in San Narciso.",
+    },
+    {
+      title: "The teenager Ramon.",
+      image: "/images/birth/birth5.png",
+      text: "In 1927, he enrolled in the Academy of Liberal Arts at the University of the Philippines but was forced to leave because of poor health. After recovering his health, Magsaysay transferred to Jose Rizal College, from which he was graduated in 1932 with a degree in commerce.",
+    },
+    {
+      title: "TRY-V-TRAN ",
+      image: "",
+      text: "The only job he could find was as a mechanic at the Try Transportation Bus Company in Manila. Within a few years, he rose to become the company's general manager.",
+    },
+  ];
+  // return pages.map(({ slug, title, text, image }) => {
+  //   return {
+  //     params: { slug },
+  //     props: { title, text, image },
+  //   };
+  // });
+  return paginate(pages, { pageSize: 1 });
+}
+
+// const { title, text, image } = Astro.props;
+const { page } = Astro.props;
+---
+
+<Theme title={"Birth & Early Life - " + page.data[0].title}>
+  <FullPage>
+    <div class="flex flex-col justify-between items-center h-full py-8">
+      <div
+        class="flex-1 grid grid-flow-row w-full md:grid-cols-2 px-4 gap-8 justify-center items-center max-w-5xl"
+      >
+        <div>
+          <img
+            id="article-img"
+            class="mx-auto rounded-xl shadow-xl transform md:scale-125"
+            src={page.data[0].image}
+          />
+        </div>
+        <p
+          class="font-semibold text-lg md:text-3xl lg:text-4xl text-slate-700 dark:text-slate-50 text-animation leading-relaxed antialiased z-[60]"
+        >
+          {page.data[0].text}
+        </p>
+      </div>
+
+      <Paginator page={page} />
+    </div>
+  </FullPage>
+</Theme>
+
+<script>
+  const animate = () => {
+    var textWrapper = document.querySelector(".text-animation");
+    textWrapper.innerHTML = textWrapper.textContent.replace(
+      /([^\x00-\x127]|\w)/g,
+      "<span class='letter'>$&</span>"
+    );
+
+    anime.timeline({ loop: false }).add({
+      targets: ".text-animation .letter",
+      opacity: [0, 1],
+      easing: "easeOutExpo",
+      duration: 300,
+      offset: "-=775",
+      delay: (el, i) => 34 * (i + 1),
+    });
+
+    anime({
+      targets: "#article-img",
+      opacity: [0, 1],
+      translateY: [-150, 0],
+      scale: [0.5, 1],
+      duration: 3000,
+      easing: "easeOutExpo",
+    });
+  };
+  document.addEventListener("swup:contentReplaced", () => {
+    console.log("animation started");
+    animate();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    animate();
+  });
+</script>

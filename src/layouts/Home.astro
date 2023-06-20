@@ -1,0 +1,48 @@
+---
+import "@fontsource/poppins";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Life of Ramon Magsaysay" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script is:inline src="/anime.min.js"></script>
+  </head>
+
+  <body class="bg-gray-100 relative">
+    <main
+      id="swup"
+      class="box-border transition-all ease-in-out duration-300 h-screen w-screen z-[1] relative"
+    >
+      <img
+        src="/special-bg.jpg"
+        class="absolute top-0 bottom-0 left-0 right-0 bg-cover object-cover z-10 grayscale opacity-10 pointer-events-none"
+      />
+      <slot class="z-20" />
+    </main>
+    <script>
+      import Swup from "swup";
+      import SwupHeadPlugin from "@swup/head-plugin";
+      import SwupScriptsPlugin from "@swup/scripts-plugin";
+      import SwupFadeTheme from "@swup/fade-theme";
+      import SwupSlideTheme from "@swup/slide-theme";
+      import SwupScrollPlugin from "@swup/scroll-plugin";
+
+      const swup = new Swup({
+        plugins: [
+          new SwupHeadPlugin(),
+          new SwupScriptsPlugin(),
+          new SwupScrollPlugin(),
+        ],
+        theme: [new SwupSlideTheme()],
+      });
+    </script>
+  </body>
+</html>

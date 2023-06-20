@@ -1,0 +1,62 @@
+---
+import "../assets/tailwind.css";
+import "@fontsource/poppins";
+import Navigation from "../components/Navigation.astro";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Life of Ramon Magsaysay" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      is:line
+      href="https://unpkg.com/open-props/easings.min.css"
+    />
+    <script is:inline src="/anime.min.js"></script>
+  </head>
+
+  <body
+    class="bg-gradient-to-b bg-no-repeat bg-cover object-cover transition-all ease-in-out duration-300 dark:from-blue-800 dark:via-blue-800/50 dark:to-emerald-800 from-cyan-500 via-yellow-300/60 to-green-600 relative h-screen w-screen overflow-hidden"
+  >
+    <img
+      src="/special-bg.jpg"
+      class="absolute top-0 bottom-0 left-0 right-0 h-screen w-screen bg-cover object-cover -z-1 filter contrast-75 grayscale opacity-25 pointer-events-none"
+    />
+    <main
+      id="swup"
+      class="transition-fade box-border h-screen w-screen z-1 relative"
+    >
+      <slot class="z-10" />
+    </main>
+    <div class="absolute top-0 w-full z-1">
+      <Navigation />
+    </div>
+    <script>
+      import Swup from "swup";
+      import SwupHeadPlugin from "@swup/head-plugin";
+      import SwupScriptsPlugin from "@swup/scripts-plugin";
+      import SwupFadeTheme from "@swup/fade-theme";
+      import SwupSlideTheme from "@swup/slide-theme";
+      import SwupScrollPlugin from "@swup/scroll-plugin";
+      import SwupPreloadPlugin from "@swup/preload-plugin";
+
+      window.swup = new Swup({
+        plugins: [
+          new SwupHeadPlugin(),
+          new SwupScriptsPlugin(),
+          new SwupScrollPlugin(),
+          new SwupPreloadPlugin(),
+        ],
+        theme: [new SwupFadeTheme()],
+      });
+    </script>
+  </body>
+</html>

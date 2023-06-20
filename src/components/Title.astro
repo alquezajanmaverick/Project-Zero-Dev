@@ -1,0 +1,41 @@
+---
+const { title } = Astro.props;
+---
+
+<h1
+  id="title"
+  class="font-bold text-5xl md:text-8xl text-center text-slate-600 dark:text-slate-200 z-20 opacity-0"
+>
+  {title}
+</h1>
+
+<script>
+  const animate = () => {
+    var textWrapper = document.querySelector("#title");
+    if (textWrapper) {
+      textWrapper.innerHTML = textWrapper.textContent.replace(
+        /\S/g,
+        "<span class='letter'>$&</span>"
+      );
+      anime({
+        targets: "#title",
+        opacity: [0, 1],
+        easing: "easeInOutExpo",
+        duration: 1000,
+      });
+      anime.timeline({ loop: false }).add({
+        targets: "#title .letter",
+        opacity: [0, 1],
+        easing: "easeInOutQuad",
+        duration: 2250,
+        delay: (el, i) => 150 * (i + 1),
+      });
+    }
+  };
+  window.swup.on("animationInDone", () => {
+    animate();
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    animate();
+  });
+</script>

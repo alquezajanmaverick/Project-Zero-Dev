@@ -1,0 +1,38 @@
+---
+import Home from "../layouts/Home.astro";
+// import InteractiveNav from "../components/vue/InteractiveNav.vue";
+import EarlyLifeSvg from "../components/EarlyLifeSvg.astro";
+import PresidencySvg from "../components/PresidencySvg.astro";
+import DeathSvg from "../components/DeathSvg.astro";
+import LegacySvg from "../components/LegacySvg.astro";
+---
+
+<Home title="Ramon Magsaysay">
+  <div
+    class="w-sreen h-screen bg-black z-10 flex items-center justify-center overflow-hidden relative"
+  >
+    <!-- <InteractiveNav client:load /> -->
+    <div class="grid grid-cols-4 items-center gap-8">
+      <a
+        href="#"
+        class="w-56 h-56 overflow-hidden flex items-center justify-start"
+        ><EarlyLifeSvg /></a
+      >
+      <a
+        href="#"
+        class="w-56 h-56 overflow-hidden flex items-center justify-center"
+        ><PresidencySvg /></a
+      >
+      <a
+        href="#"
+        class="w-56 h-56 overflow-hidden flex items-center justify-center"
+        ><DeathSvg /></a
+      >
+      <a
+        href="#"
+        class="w-56 h-56 overflow-hidden flex items-center justify-center"
+        ><LegacySvg /></a
+      >
+    </div>
+  </div>
+</Home>

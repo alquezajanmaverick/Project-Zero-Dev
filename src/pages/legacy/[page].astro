@@ -1,0 +1,134 @@
+---
+import Theme from "../../layouts/Theme.astro";
+import FullPage from "../../components/FullPage.astro";
+import Paginator from "../../components/Paginator.astro";
+
+export async function getStaticPaths({ paginate }) {
+  const pages = [
+    {
+      title: "Ramon Magsaysay with the ordinary people.",
+      image: "/images/presidency/presidency1.jpg",
+      text: "After the war, Magsaysay entered politics. In April 1946, he was elected to the House of Representatives as the Representative of Zambales. He was reelected in 1949.",
+      isImage: true,
+    },
+    {
+      title:
+        "Defense Secretary Ramon Magsaysay oversees the capture of William Pomeroy, an American ideologist, and leader of the Nueva Ecija Huk Propaganda Corps.",
+      image: "/images/presidency/presidency2.png",
+      text: "On 1 September 1950, Magsaysay was appointed as Secretary of the National Defense by Pres. Elpidio Quirino. As Secretary, he persuaded the surrender of the Huks, the armed communist rebels who had already surrounded the suburbs of Manila and could have overthrown the government. This was the biggest achievement that Magsaysay did for the country. Because he kept the country from falling into communist rule, he was hailed as the “Savior of Democracy in the Philippines.”",
+      isImage: true,
+    },
+    {
+      title:
+        "Ramon Magsaysay talks to his supporters during the presidential campaign.",
+      image: "/images/presidency/presidency3.png",
+      text: "Because of his feats as Defense Secretary, Magsaysay became popular among the Filipino masses. He received such accolades as “The Guy” and “Idol of the Masses.” He visited and tried to k ow the condition of the ordinary people in the countryside.<br/><br/>As the elections in 1953 were approaching, he was deemed as the country’s next president. He resigned from Quirino’s Cabinet and was nominated by the Nacionalista Party as its candidate for president.",
+      isImage: true,
+    },
+    {
+      title: "Mambo Magsaysay by Raul Manglapus",
+      image:
+        "https://www.youtube-nocookie.com/embed/qJyuARjSo0M?loop=1&rel=0&controls=0&frameborder=0",
+      text: "“Mambo, Magsaysay” was the campaign jingle of President Ramon Magsaysay and many believed it was instrumental for his landslide victory against the incumbent President Elpidio Quirino in the November 1953 national elections. Together with the popular jingle, he introduced the “barrio to barrio” style of campaigning which endeared him to all, especially the masses. His slogan was “Magsaysay is my guy” which capitalized on his charismatic appeal.",
+      isImage: false,
+    },
+    {
+      title: "Ramon Magsaysay takes his oath as president",
+      image: "/images/presidency/presidency5.png",
+      text: "In the elections on 10 November 1953, the people elected Magsaysay as the country’s next president.<br/><br/>On 30 December 1953, at the Independence Grandstand in Manila, Ramon Magsaysay took his oath as the 7th president of the Philippines.",
+      isImage: true,
+    },
+    {
+      title: "Ordinary people are allowed to enter Malacañang Palace.",
+      image: "/images/presidency/presidency6.png",
+      text: "President Magsaysay also opened the Malacañang Palace to ordinary farmers and workers and allowed them to visit it.",
+      isImage: true,
+    },
+    {
+      title: "President Magsaysay helped the farmers improve their conditions.",
+      image: "/images/presidency/presidency7.png",
+      text: "Two of the proposed legislations that Magsaysay signed into law were Republic Act No. 1199 (the Agricultural Tenancy Act of 1954) and Republic Act No. 1400 (the Land Reform Act of 1955). Magsaysay pushed these laws, for he believed that if the government would give attention to the farmers, who were the “backbone of the nation,” hunger, diseases, ignorance, and insurgency against the government would be solved.",
+      isImage: true,
+    },
+    {
+      title:
+        "The official picture of Ramon Magsaysay as the seventh president of the Philippines.",
+      image: "/images/presidency/presidency8.jpg",
+      text: "Magsaysay’s administration was considered one of the cleanest and most corruption-free in modern Philippines history; the period of his presidency is often cited as the Philippines’s “Golden Years”.<br/><br/> Trade and industry flourished, the Philippine military was at its prime, and the country gained international recognition in sports, culture, and foreign affairs. The Philippines placed second on a ranking of Asia’s clean and well-governed countries.",
+      isImage: true,
+    },
+  ];
+  return paginate(pages, { pageSize: 1 });
+}
+
+const { page } = Astro.props;
+---
+
+<Theme title={"Birth & Early Life - " + page.data[0].title}>
+  <FullPage>
+    <div class="flex flex-col justify-between items-center h-full py-8">
+      <div
+        class="flex-1 grid grid-flow-row w-full md:grid-cols-2 gap-12 px-4 justify-center items-center max-w-7xl"
+      >
+        <div>
+          {
+            page.data[0].isImage ? (
+              <img
+                id="article-img"
+                class="mx-auto rounded-xl shadow-xl"
+                src={page.data[0].image}
+              />
+            ) : (
+              <iframe
+                id="article-img"
+                class="aspect-video w-full rounded-lg"
+                src={page.data[0].image}
+              />
+            )
+          }
+        </div>
+        <p
+          class="font-semibold text-lg md:text-2xl lg:text-3xl text-slate-700 dark:text-slate-50 leading-relaxed antialiased text-animation relative z-[60]"
+          set:html={page.data[0].text}
+        />
+      </div>
+      <Paginator page={page} />
+    </div>
+  </FullPage>
+</Theme>
+
+<script>
+  const animate = () => {
+    var textWrapper = document.querySelector(".text-animation");
+    textWrapper.innerHTML = textWrapper.textContent.replace(
+      /([^\x00-\x127]|\w)/g,
+      "<span class='letter'>$&</span>"
+    );
+
+    anime.timeline({ loop: false }).add({
+      targets: ".text-animation .letter",
+      opacity: [0, 1],
+      easing: "easeOutExpo",
+      duration: 300,
+      offset: "-=775",
+      delay: (el, i) => 34 * (i + 1),
+    });
+
+    anime({
+      targets: "#article-img",
+      opacity: [0, 1],
+      translateY: [-150, 0],
+      scale: [0.5, 1],
+      duration: 3000,
+      easing: "easeOutExpo",
+    });
+  };
+  document.addEventListener("swup:contentReplaced", () => {
+    console.log("animation started");
+    animate();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    animate();
+  });
+</script>

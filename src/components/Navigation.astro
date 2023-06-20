@@ -1,0 +1,84 @@
+---
+import DarkMode from "./DarkMode.astro";
+---
+
+<div
+  class="nav-but-wrap px-8 mt-4 z-[100] !flex justify-between items-center w-full"
+>
+  <DarkMode />
+  <div class="menu-icon hover-target">
+    <span class="menu-icon__line menu-icon__line-left"></span>
+    <span class="menu-icon__line"></span>
+    <span class="menu-icon__line menu-icon__line-right"></span>
+  </div>
+</div>
+<div
+  class="nav after:bg-slate-100 after:backdrop-filter after:backdrop-blur-sm after:bg-opacity-70 dark:after:bg-slate-700 dark:after:bg-opacity-70 after:transition-colors after:ease-in-out after:duration-300"
+>
+  <div class="nav__content">
+    <ul>
+      <li class="py-4 navi_item">
+        <a
+          href="/early-life"
+          data-swup-preload
+          class="text-3xl font-bold uppercase text-slate-600 dark:text-slate-100"
+          >Birth & Early Life</a
+        >
+      </li>
+      <li class="py-4 navi_item">
+        <a
+          href="/presidency"
+          data-swup-preload
+          class="text-3xl font-bold uppercase text-slate-600 dark:text-slate-100"
+          >Presidency</a
+        >
+      </li>
+      <li class="py-4 navi_item">
+        <a
+          href="/death"
+          data-swup-preload
+          class="text-3xl font-bold uppercase text-slate-600 dark:text-slate-100"
+          >Death</a
+        >
+      </li>
+      <li class="py-4 navi_item">
+        <a
+          href="/legacy"
+          data-swup-preload
+          class="text-3xl font-bold uppercase text-slate-600 dark:text-slate-100"
+          >Legacy</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  var app = (function () {
+    var body = undefined;
+    var menu = undefined;
+    var menuItems = undefined;
+    var init = function init() {
+      body = document.querySelector("body");
+      menu = document.querySelector(".menu-icon");
+      menuItems = document.querySelectorAll(".navi_item");
+      applyListeners();
+    };
+    var applyListeners = function applyListeners() {
+      menu.addEventListener("click", function () {
+        return toggleClass(body, "nav-active");
+      });
+      menuItems.forEach((element) => {
+        element.addEventListener("click", function () {
+          return toggleClass(body, "nav-active");
+        });
+      });
+    };
+    var toggleClass = function toggleClass(element, stringClass) {
+      if (element.classList.contains(stringClass))
+        element.classList.remove(stringClass);
+      else element.classList.add(stringClass);
+    };
+    init();
+  })();
+</script>

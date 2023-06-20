@@ -1,0 +1,11 @@
+---
+import { Image } from "@astrojs/image/components";
+const { text, image } = Astro.props;
+---
+
+<div
+  class="h-screen w-screen bg-slate-500 bg-cover bg-no-repeat bg-center flex items-center justify-center px-8 swiper-slides"
+  style={{ "background-image": `url(${image})` }}
+>
+  <p class="text-4xl leading-relaxed font-bold poppins w-full">{text}</p>
+</div>
