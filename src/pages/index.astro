@@ -9,30 +9,34 @@ import LegacySvg from "../components/LegacySvg.astro";
 
 <Home title="Ramon Magsaysay">
   <div
-    class="w-sreen h-screen bg-black z-10 flex items-center justify-center overflow-hidden relative"
+    class="w-sreen h-screen z-10 flex flex-col items-center justify-center overflow-hidden relative"
   >
     <!-- <InteractiveNav client:load /> -->
     <div class="grid grid-cols-4 items-center gap-8">
       <a
-        href="#"
-        class="w-56 h-56 overflow-hidden flex items-center justify-start"
+        href="/early-life"
+        class="w-56 h-56 overflow-hidden flex items-center justify-start hover:scale-110 hover:transform transition-all ease-in-out duration-300"
         ><EarlyLifeSvg /></a
       >
       <a
-        href="#"
-        class="w-56 h-56 overflow-hidden flex items-center justify-center"
+        href="/presidency"
+        class="w-56 h-56 overflow-hidden flex items-center justify-center hover:scale-110 hover:transform transition-all ease-in-out duration-300"
         ><PresidencySvg /></a
       >
       <a
-        href="#"
-        class="w-56 h-56 overflow-hidden flex items-center justify-center"
+        href="/death"
+        class="w-56 h-56 overflow-hidden flex items-center justify-center hover:scale-110 hover:transform transition-all ease-in-out duration-300"
         ><DeathSvg /></a
       >
       <a
-        href="#"
-        class="w-56 h-56 overflow-hidden flex items-center justify-center"
+        href="/legacy"
+        class="w-56 h-56 overflow-hidden flex items-center justify-center hover:scale-110 hover:transform transition-all ease-in-out duration-300"
         ><LegacySvg /></a
       >
     </div>
+    <a
+      href="/about-us"
+      class="mt-12 text-slate-600 underline underline-offset-4">About Us</a
+    >
   </div>
 </Home>
