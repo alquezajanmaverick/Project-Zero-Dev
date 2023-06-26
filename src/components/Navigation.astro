@@ -74,10 +74,12 @@ import DarkMode from "./DarkMode.astro";
     var body = undefined;
     var menu = undefined;
     var menuItems = undefined;
+    var links = undefined;
     var init = function init() {
       body = document.querySelector("body");
       menu = document.querySelector(".menu-icon");
       menuItems = document.querySelectorAll(".navi_item");
+      links = document.querySelectorAll(".navi_item a");
       applyListeners();
     };
     var applyListeners = function applyListeners() {
@@ -87,6 +89,19 @@ import DarkMode from "./DarkMode.astro";
       menuItems.forEach((element) => {
         element.addEventListener("click", function () {
           return toggleClass(body, "nav-active");
+        });
+      });
+      links.forEach((element) => {
+        element.addEventListener("click", function (e) {
+          if (e.target.attributes.href.value == "/") {
+            e.preventDefault;
+            window.swup.destroy();
+            window.location.assign("/");
+          } else if (e.target.attributes.href.value == "/about-us") {
+            e.preventDefault;
+            window.swup.destroy();
+            window.location.assign("/about-us");
+          }
         });
       });
     };
