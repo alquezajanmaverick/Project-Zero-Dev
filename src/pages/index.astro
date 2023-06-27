@@ -5,15 +5,16 @@ import EarlyLifeSvg from "../components/EarlyLifeSvg.astro";
 import PresidencySvg from "../components/PresidencySvg.astro";
 import DeathSvg from "../components/DeathSvg.astro";
 import LegacySvg from "../components/LegacySvg.astro";
+
+import HomeTitle from "../components/HomeTitle.astro";
 ---
 
 <Home title="Ramon Magsaysay">
   <div
     class="w-sreen h-screen z-10 flex flex-col items-center justify-center overflow-hidden relative"
   >
-    <h1 class="text-slate-600 text-center text-5xl mb-12">
-      Life of Ramon Magsaysay
-    </h1>
+    <HomeTitle title="Life of Ramon Magsaysay" />
+
     <!-- <InteractiveNav client:load /> -->
     <div class="grid grid-cols-4 items-center gap-8">
       <a
